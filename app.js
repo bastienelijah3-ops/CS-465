@@ -1,3 +1,5 @@
+// Bring in the database connection
+require('./app_api/models/db');
 const travelRouter = require('./app_server/routes/travel');
 var createError = require('http-errors');
 var express = require('express');
