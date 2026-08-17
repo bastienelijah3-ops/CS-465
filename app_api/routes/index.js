@@ -5,7 +5,8 @@ const tripsController = require('../controllers/trips');
 // Route for getting all trips
 router
     .route('/trips')
-    .get(tripsController.tripsList);
+    .get(tripsController.tripsList)
+    .post(tripsController.tripsAddTrip);
 
 // Route for getting a single trip by code parameter
 router

@@ -1,8 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const controller = require('../controllers/travel');
+// app_server/controllers/travel.js
 
-/* Define the route matching the travel page path */
-router.get('/', controller.travel);
+/* GET travel view */
+const travel = async function(req, res, next) {
+    // Or whatever your Handlebars rendering logic is
+    res.render('travel', { title: 'Travlr Getaways' });
+};
 
-module.exports = router;
+module.exports = {
+    travel
+};
