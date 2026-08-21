@@ -1,33 +1,43 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Trip } from '../models/trip';
+import { BROWSER_STORAGE } from '../storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripDataService {
-  private apiBaseUrl = 'http://localhost:3000/api';
+  private apiBaseUrl = 'http://localhost:3000/api/trips';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    @Inject(BROWSER_STORAGE) private storage: Storage
+  ) {}
 
-  getTrips(): Observable<Trip[]> {
-    return this.http.get<Trip[]>(`${this.apiBaseUrl}/trips`);
+  public getTrips(): Observable<Trip[]> {
+    return this.http.get<Trip[]>(this.apiBaseUrl);
   }
 
-  getTrip(tripCode: string): Observable<Trip[]> {
-    return this.http.get<Trip[]>(`${this.apiBaseUrl}/trips/${tripCode}`);
+  public getTrip(tripCode: string): Observable<Trip> {
+    return this.http.get<Trip>(`${this.apiBaseUrl}/${tripCode}`);
   }
 
-  addTrip(formData: Trip): Observable<Trip> {
-    return this.http.post<Trip>(`${this.apiBaseUrl}/trips`, formData);
+  public addTrip(formData: Trip): Observable<Trip> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.storage.getItem('travlr-token')}`
+      })
+    };
+    return this.http.post<Trip>(this.apiBaseUrl, formData, httpOptions);
   }
 
-  updateTrip(formData: Trip): Observable<Trip> {
-    return this.http.put<Trip>(`${this.apiBaseUrl}/trips/${formData.code}`, formData);
-  }
-
-  deleteTrip(tripCode: string): Observable<any> {
-    return this.http.delete(`${this.apiBaseUrl}/trips/${tripCode}`);
+  public updateTrip(formData: Trip): Observable<Trip> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${this.storage.getItem('travlr-token')}`
+      })
+    };
+    return this.http.put<Trip>(`${this.apiBaseUrl}/${formData.code}`, formData, httpOptions);
   }
 }

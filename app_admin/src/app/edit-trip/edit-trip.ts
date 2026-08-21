@@ -40,9 +40,9 @@ export class EditTrip implements OnInit {
 
     if (tripCode) {
       this.tripDataService.getTrip(tripCode).subscribe({
-        next: (data: Trip[]) => {
-          if (data && data.length > 0) {
-            this.editForm.patchValue(data[0]);
+        next: (data: Trip) => {
+          if (data) {
+            this.editForm.patchValue(data);
           }
         },
         error: (err: any) => console.error(err)

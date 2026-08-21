@@ -18,4 +18,6 @@ mongoose.connection.on('disconnected', () => {
 });
 
 // Bring in the Schemas & Models
+// Bring in your schemas & models
 require('./trips');
+require('./users');

@@ -1,0 +1,46 @@
+<div class="col-md-6">
+  <h2 class="text-center">Add New Trip</h2>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Code:</label>
+      <input type="text" formControlName="code" placeholder="Code" class="form-control" [ngClass]="{ 'is-invalid': submitted && addForm.controls['code'].errors}">
+    </div>
+
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" formControlName="name" placeholder="Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && addForm.controls['name'].errors}">
+    </div>
+
+    <div class="form-group">
+      <label>Length:</label>
+      <input type="text" formControlName="length" placeholder="Length" class="form-control" [ngClass]="{ 'is-invalid': submitted && addForm.controls['length'].errors}">
+    </div>
+
+    <div class="form-group">
+      <label>Start Date:</label>
+      <input type="date" formControlName="start" class="form-control" [ngClass]="{ 'is-invalid': submitted && addForm.controls['start'].errors}">
+    </div>
+
+    <div class="form-group">
+      <label>Resort:</label>
+      <input type="text" formControlName="resort" placeholder="Resort" class="form-control" [ngClass]="{ 'is-invalid': submitted && addForm.controls['resort'].errors}">
+    </div>
+
+    <div class="form-group">
+      <label>Per Person Rate:</label>
+      <input type="text" formControlName="perPerson" placeholder="Price" class="form-control" [ngClass]="{ 'is-invalid': submitted && addForm.controls['perPerson'].errors}">
+    </div>
+
+    <div class="form-group">
+      <label>Image Filename:</label>
+      <input type="text" formControlName="image" placeholder="Image Name" class="form-control" [ngClass]="{ 'is-invalid': submitted && addForm.controls['image'].errors}">
+    </div>
+
+    <div class="form-group">
+      <label>Description:</label>
+      <textarea formControlName="description" placeholder="Description" class="form-control" rows="4"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-info mt-2">Save Trip</button>
+  </form>
+</div>
